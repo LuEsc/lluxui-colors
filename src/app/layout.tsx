@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { montserrat } from "./config/fonts";
+import Header from "./palette-generator/Header";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   title: "lluxui-colors",
@@ -13,12 +15,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${montserrat.className} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <TooltipProvider>
+      <html lang="en">
+        <body
+          className={`${montserrat.className} antialiased  bg-gray-50`}
+        >
+          <header>
+            <Header />
+          </header>
+          {children}
+        </body>
+      </html>
+    </TooltipProvider>
   );
 }
