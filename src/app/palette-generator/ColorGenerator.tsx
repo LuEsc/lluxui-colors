@@ -99,33 +99,33 @@ const ColorGenerator = () => {
                 />
             ))
             ) : (
-                <div className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-zinc-200 rounded-lg bg-zinc-50/50">
+            <div className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-zinc-200 rounded-lg bg-zinc-50/50">
                 <div className="flex flex-col items-center max-w-md text-center space-y-4">
-                  <div className="p-3 rounded-full bg-zinc-100">
+                    <div className="p-3 rounded-full bg-zinc-100">
                     <Wand2 className="w-6 h-6 text-zinc-400" />
-                  </div>
-                  <div className="space-y-2">
+                    </div>
+                    <div className="space-y-2">
                     <h3 className="text-lg font-semibold text-zinc-900">
-                      Genera tu Primera Paleta
+                        Generate Your First Palette
                     </h3>
                     <p className="text-sm text-zinc-500">
-                      Comienza de cualquiera de estas formas:
+                        Get started in one of these ways:
                     </p>
                     <ul className="text-sm text-zinc-500 space-y-1">
-                      <li>• Ingresa un código de color hex en el campo de arriba</li>
-                      <li>• Haz clic en los cuadrados de color para elegir tus colores base</li>
-                      <li>• Haz clic en el icono de la varita para generar una paleta</li>
+                        <li>• Enter a hex color code in the field above</li>
+                        <li>• Click on the color squares to choose your base colors</li>
+                        <li>• Click on the wand icon to generate a palette</li>
                     </ul>
-                  </div>
-                  <div className="flex flex-wrap justify-center gap-2 pt-4">
+                    </div>
+                    <div className="flex flex-wrap justify-center gap-2 pt-4">
                     <div className="w-8 h-8 rounded bg-[#9b87f5] animate-pulse" />
                     <div className="w-8 h-8 rounded bg-[#E5DEFF] animate-pulse delay-100" />
                     <div className="w-8 h-8 rounded bg-[#F97316] animate-pulse delay-200" />
                     <div className="w-8 h-8 rounded bg-[#A78BFA] animate-pulse delay-300" />
                     <div className="w-8 h-8 rounded bg-[#6D28D9] animate-pulse delay-400" />
-                  </div>
+                    </div>
                 </div>
-              </div>
+            </div>
             )}
         </div>
       </div>
