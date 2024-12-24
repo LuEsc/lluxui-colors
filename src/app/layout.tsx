@@ -18,12 +18,12 @@ export default function RootLayout({
   return (
     <TooltipProvider>
       <html lang="en">
-        <body className={`${montserrat.className} antialiased bg-gray-50 flex flex-col min-h-screen`}>
+        <body className={`${montserrat.className} antialiased bg-gray-50 flex flex-col min-h-screen overflow-x-hidden`}>
           <header className="sticky top-0 z-50 w-full bg-transparent backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <Header />
           </header>
           <main className="flex-1 container mx-auto">{children}</main>
-          <footer className="m-auto supports-[backdrop-filter]:bg-background/60 text-center py-4">
+          <footer className="m-auto supports-[backdrop-filter]:bg-background/60 text-center py-4 px-3">
             <Footer />
           </footer>
         </body>
