@@ -86,7 +86,6 @@ const ColorGenerator = () => {
                   <SelectItem value="tetradic">Tetradic</SelectItem>
                   <SelectItem value="monochromatic">Monochromatic</SelectItem>
                   <SelectItem value="gradient">Gradient</SelectItem>
-                  <SelectItem value="web">Web Palette</SelectItem>
                 </SelectContent>
               </Select>
               <Button
