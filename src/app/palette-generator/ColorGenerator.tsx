@@ -85,7 +85,7 @@ const ColorGenerator = () => {
 
         <div className="grid gap-6 md:gap-8">
           <div className="space-y-4 pb-7 pt-5">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center xs:flex-col xs:items-center">
               <h2 className="text-lg font-semibold text-zinc-900">Choose Your Colors</h2>
               <Button
                 onClick={generatePalette}
@@ -106,8 +106,8 @@ const ColorGenerator = () => {
                     setHexInput(e.target.value)
                     setError("")
                   }}
-                  placeholder="Enter hex color (e.g., #FF0000)"
-                  className="w-full"
+                  placeholder="(e.g., #FF0000)"
+                  className="w-full text-xs"
                 />
                 <Button
                   size="sm"
