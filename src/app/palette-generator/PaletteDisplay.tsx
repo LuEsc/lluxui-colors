@@ -22,7 +22,7 @@ const PaletteDisplay = ({ colors, onDelete }: PaletteDisplayProps) => {
   const copyToClipboard = (color: string, index: number) => {
     navigator.clipboard.writeText(color);
     setCopiedIndex(index);
-    toast.success("Color copied to clipboard!");
+    toast.success(`Color ${color} copied to clipboard!`);
     setTimeout(() => setCopiedIndex(null), 1500);
   };
 
