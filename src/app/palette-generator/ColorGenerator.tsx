@@ -65,9 +65,7 @@ const ColorGenerator = () => {
     <div className="w-full space-y-8">
       <div className="space-y-3 text-center">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-900">Color Palette Generator</h1>
-        <p className="text-sm md:text-base text-zinc-500 max-w-xl mx-auto">
-          Enter hex codes or choose colors to create your perfect palette
-        </p>
+        <p className="text-sm md:text-base text-zinc-500 max-w-xl mx-auto"> You can generate a palette and then either copy each color&apos;s hex code or its corresponding Tailwind class for seamless integration into your project. </p>
       </div>
 
       <div className="grid gap-6 md:gap-8">
