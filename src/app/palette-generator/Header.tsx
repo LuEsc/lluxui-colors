@@ -27,7 +27,7 @@ const Header = () => {
                   className="h-9 w-9"
                   asChild
                 >
-                  <Link href="https://github.com/yourusername/lluxui-colors" target="_blank">
+                  <Link href="https://github.com/LuEsc/lluxui-colors" target="_blank">
                     <GithubIcon className="h-4 w-4" />
                     <span className="sr-only">GitHub</span>
                   </Link>
