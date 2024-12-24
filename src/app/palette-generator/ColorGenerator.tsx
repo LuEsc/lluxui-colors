@@ -1,25 +1,31 @@
-"use client"
+'use client'
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Minus, Plus, Wand2 } from 'lucide-react'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Plus, Trash2, Wand2 } from 'lucide-react'
 import { useState } from "react"
 import ColorPicker from "./ColorPicker"
 import PaletteDisplay from "./PaletteDisplay"
+import { ColorService, HarmonyType, WebColorPalette } from "./service/ColorService"
+import WebPaletteVisualizer from "./WebPaletteVisualizer"
 
 const ColorGenerator = () => {
   const [hexInput, setHexInput] = useState("")
   const [colors, setColors] = useState(["#9b87f5"])
-  const [palettes, setPalettes] = useState<string[][]>([])
+  const [palettes, setPalettes] = useState<(string[] | WebColorPalette)[]>([])
   const [error, setError] = useState("")
-
-  const isValidHex = (hex: string) => {
-    return /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex)
-  }
+  const [harmonyType, setHarmonyType] = useState<HarmonyType>('analogous')
 
   const addColorFromHex = () => {
-    const formattedHex = hexInput.startsWith('#') ? hexInput : `#${hexInput}`
-    if (isValidHex(formattedHex)) {
+    const formattedHex = ColorService.formatHex(hexInput)
+    if (ColorService.isValidHex(formattedHex)) {
       if (colors.length < 3) {
         setColors([...colors, formattedHex])
         setHexInput("")
@@ -46,31 +52,12 @@ const ColorGenerator = () => {
   }
 
   const generatePalette = () => {
-    const baseColors = [...colors]
-    const newPalette = [
-      ...baseColors,
-      ...baseColors.map((color, i) => shiftHue(color, 30 + (i * 15))),
-      ...baseColors.map((color) => adjustLightness(color, 20)),
-      ...baseColors.map((color) => adjustLightness(color, -20)),
-    ].slice(0, 8)
-
+    const newPalette = ColorService.generateHarmony(colors, harmonyType)
     setPalettes((prev) => [newPalette, ...prev])
   }
 
   const deletePalette = (index: number) => {
     setPalettes((prev) => prev.filter((_, i) => i !== index))
-  }
-
-  const shiftHue = (hex: string, degrees: number): string => {
-    const hue = parseInt(hex.slice(1), 16)
-    const shifted = (hue + degrees) % 360
-    return `#${Math.floor(shifted).toString(16).padStart(6, "0")}`
-  }
-
-  const adjustLightness = (hex: string, amount: number): string => {
-    const color = parseInt(hex.slice(1), 16)
-    const adjusted = Math.max(0, Math.min(0xffffff, color + amount * 0x1000))
-    return `#${Math.floor(adjusted).toString(16).padStart(6, "0")}`
   }
 
   return (
@@ -85,19 +72,34 @@ const ColorGenerator = () => {
 
         <div className="grid gap-6 md:gap-8">
           <div className="space-y-4 pb-7 pt-5">
-            <div className="flex justify-between items-center xs:flex-col xs:items-center">
+            <div className="flex justify-between items-center gap-4 flex-wrap">
               <h2 className="text-lg font-semibold text-zinc-900">Choose Your Colors</h2>
-              <Button
-                onClick={generatePalette}
-                className="gap-2"
-                size="sm"
-              >
-                <Wand2 className="w-4 h-4" />
-                Generate Palette
-              </Button>
+              <div className="flex items-center gap-2">
+                <Select value={harmonyType} onValueChange={(value: HarmonyType) => setHarmonyType(value)}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select harmony" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="analogous">Analogous</SelectItem>
+                    <SelectItem value="complementary">Complementary</SelectItem>
+                    <SelectItem value="triadic">Triadic</SelectItem>
+                    <SelectItem value="tetradic">Tetradic</SelectItem>
+                    <SelectItem value="monochromatic">Monochromatic</SelectItem>
+                    <SelectItem value="gradient">Gradient</SelectItem>
+                    <SelectItem value="web">Web Palette</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Button
+                  onClick={generatePalette}
+                  className="gap-2"
+                  size="sm"
+                >
+                  <Wand2 className="w-4 h-4" />
+                  Generate Palette
+                </Button>
+              </div>
             </div>
             
-            {/* Hex Input */}
             <div className="flex flex-col gap-3 items-center">
               <div className="flex-1 relative w-full">
                 <Input
@@ -122,28 +124,30 @@ const ColorGenerator = () => {
               {error && <p className="text-sm text-red-500">{error}</p>}
 
               <div className="flex justify-center gap-3">
-                {colors.map((color, index) => (
-                  <div key={index} className="relative group">
-                    <ColorPicker
-                      color={color}
-                      onChange={(newColor) => {
-                        const newColors = [...colors]
-                        newColors[index] = newColor
-                        setColors(newColors)
-                      }}
-                    />
-                    <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button
-                        size="icon"
-                        variant="secondary"
-                        className="h-5 w-5 rounded-full"
-                        onClick={() => removeColorPicker(index)}
-                      >
-                        <Minus className="h-3 w-3" />
-                      </Button>
-                    </div>
+              {colors.map((color, index) => (
+                <div key={index} className="relative">
+                  <ColorPicker
+                    color={color}
+                    onChange={(newColor: string) => {
+                      const newColors = [...colors];
+                      newColors[index] = newColor;
+                      setColors(newColors);
+                    }}
+                    className="w-20 h-20 rounded-lg"
+                  />
+                  <div className="absolute bottom-6 right-7">
+                    <Button
+                      size="icon"
+                      variant="secondary"
+                      className="h-6 w-6 rounded-full bg-gray-200 hover:bg-gray-300 active:bg-gray-400 transition-all duration-200"
+                      onClick={() => removeColorPicker(index)}
+                      aria-label="Remove color"
+                    >
+                      <Trash2 className="h-4 w-4 text-red-500" />
+                    </Button>
                   </div>
-                ))}
+                </div>
+              ))}
                 {colors.length < 3 && (
                   <Button
                     size="icon"
@@ -158,15 +162,22 @@ const ColorGenerator = () => {
             </div>
           </div>
 
-
           <div className="space-y-6">
             {palettes.length > 0 ? (
               palettes.map((palette, index) => (
-                <PaletteDisplay 
-                  key={index} 
-                  colors={palette} 
-                  onDelete={() => deletePalette(index)} 
-                />
+                Array.isArray(palette) ? (
+                  <PaletteDisplay 
+                    key={index} 
+                    colors={palette} 
+                    onDelete={() => deletePalette(index)} 
+                  />
+                ) : (
+                  <WebPaletteVisualizer
+                    key={index}
+                    palette={palette}
+                    onDelete={() => deletePalette(index)}
+                  />
+                )
               ))
             ) : (
               <div className="flex flex-col items-center justify-center p-8 border-2 border-dashed border-zinc-200 rounded-lg bg-zinc-50/50">
@@ -180,7 +191,7 @@ const ColorGenerator = () => {
                     </h3>
                     <p className="text-sm text-zinc-500">
                       Choose up to three colors using the color pickers or enter hex codes, 
-                      then click &quot;Generate Palette&quot; to create your color combinations.
+                      then select a harmony type and click &quot;Generate Palette&quot; to create your color combinations.
                     </p>
                   </div>
                 </div>

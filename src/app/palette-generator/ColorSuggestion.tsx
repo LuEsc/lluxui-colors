@@ -1,56 +1,57 @@
 import React from "react";
 
+const colorMeanings = [
+  {
+    color: "#9b87f5",
+    name: "Primary Purple",
+    meaning: "Trust, luxury, and creativity",
+    useCases: ["SaaS platforms", "Creative agencies", "Digital products"]
+  },
+  {
+    color: "#E5DEFF",
+    name: "Soft Purple",
+    meaning: "Calmness, elegance, and sophistication",
+    useCases: ["Beauty websites", "Wellness apps", "Portfolio sites"]
+  },
+  {
+    color: "#F97316",
+    name: "Bright Orange",
+    meaning: "Energy, enthusiasm, and confidence",
+    useCases: ["E-commerce", "Food delivery", "Sports websites"]
+  },
+  {
+    color: "#0EA5E9",
+    name: "Ocean Blue",
+    meaning: "Stability, trust, and professionalism",
+    useCases: ["Corporate sites", "Financial services", "Healthcare"]
+  },
+  {
+    color: "#8B5CF6",
+    name: "Vivid Purple",
+    meaning: "Innovation, wisdom, and royalty",
+    useCases: ["Tech startups", "Educational platforms", "Event websites"]
+  },
+  {
+    color: "#D946EF",
+    name: "Magenta Pink",
+    meaning: "Creativity, youth, and excitement",
+    useCases: ["Fashion sites", "Beauty blogs", "Entertainment"]
+  },
+  {
+    color: "#1EAEDB",
+    name: "Bright Blue",
+    meaning: "Communication, clarity, and efficiency",
+    useCases: ["Communication apps", "Project management", "Social media"]
+  },
+  {
+    color: "#ea384c",
+    name: "Vibrant Red",
+    meaning: "Energy, passion, and urgency",
+    useCases: ["Food delivery", "Gaming sites", "Sports brands"]
+  }
+];
+
 const ColorSuggestions = () => {
-  const colorMeanings = [
-    {
-      color: "#9b87f5",
-      name: "Primary Purple",
-      meaning: "Trust, luxury, and creativity",
-      useCases: ["SaaS platforms", "Creative agencies", "Digital products"]
-    },
-    {
-      color: "#E5DEFF",
-      name: "Soft Purple",
-      meaning: "Calmness, elegance, and sophistication",
-      useCases: ["Beauty websites", "Wellness apps", "Portfolio sites"]
-    },
-    {
-      color: "#F97316",
-      name: "Bright Orange",
-      meaning: "Energy, enthusiasm, and confidence",
-      useCases: ["E-commerce", "Food delivery", "Sports websites"]
-    },
-    {
-      color: "#0EA5E9",
-      name: "Ocean Blue",
-      meaning: "Stability, trust, and professionalism",
-      useCases: ["Corporate sites", "Financial services", "Healthcare"]
-    },
-    {
-      color: "#8B5CF6",
-      name: "Vivid Purple",
-      meaning: "Innovation, wisdom, and royalty",
-      useCases: ["Tech startups", "Educational platforms", "Event websites"]
-    },
-    {
-      color: "#D946EF",
-      name: "Magenta Pink",
-      meaning: "Creativity, youth, and excitement",
-      useCases: ["Fashion sites", "Beauty blogs", "Entertainment"]
-    },
-    {
-      color: "#1EAEDB",
-      name: "Bright Blue",
-      meaning: "Communication, clarity, and efficiency",
-      useCases: ["Communication apps", "Project management", "Social media"]
-    },
-    {
-      color: "#ea384c",
-      name: "Vibrant Red",
-      meaning: "Energy, passion, and urgency",
-      useCases: ["Food delivery", "Gaming sites", "Sports brands"]
-    }
-  ];
 
   return (
     <div className="h-full bg-white p-6 overflow-y-auto">
