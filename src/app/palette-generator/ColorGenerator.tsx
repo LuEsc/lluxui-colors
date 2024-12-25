@@ -61,7 +61,7 @@ const ColorGenerator = () => {
   }
 
   return (
-    <div className="flex flex-col items-center w-full max-w-6xl mx-auto px-4 sm:px-4 py-8">
+    <div className="flex flex-col items-center w-full max-w-4xl mx-auto px-4 sm:px-4 py-8">
     <div className="w-full space-y-8">
       <div className="space-y-3 text-center">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-900">Color Palette Generator</h1>
@@ -121,41 +121,41 @@ const ColorGenerator = () => {
             {error && <p className="text-sm text-red-500">{error}</p>}
 
             <div className="flex flex-wrap justify-center gap-3">
-              {colors.map((color, index) => (
-                <div key={index} className="relative">
-                  <ColorPicker
-                    color={color}
-                    onChange={(newColor: string) => {
-                      const newColors = [...colors];
-                      newColors[index] = newColor;
-                      setColors(newColors);
-                    }}
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg"
-                  />
-                  <div className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2">
-                    <Button
-                      size="icon"
-                      variant="secondary"
-                      className="h-6 w-6 rounded-full bg-gray-200 hover:bg-gray-300 active:bg-gray-400 transition-all duration-200"
-                      onClick={() => removeColorPicker(index)}
-                      aria-label="Remove color"
-                    >
-                      <Trash2 className="h-4 w-4 text-red-500" />
-                    </Button>
-                  </div>
-                </div>
-              ))}
-              {colors.length < 3 && (
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className="h-16 w-16 sm:h-20 sm:w-20 rounded-lg border-dashed"
-                  onClick={addColorPicker}
-                >
-                  <Plus className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
+      {colors.map((color, index) => (
+        <div key={index} className="relative w-16 h-16 sm:w-20 sm:h-20">
+          <ColorPicker
+            color={color}
+            onChange={(newColor: string) => {
+              const newColors = [...colors]
+              newColors[index] = newColor
+              setColors(newColors)
+            }}
+            className="w-full h-full rounded-lg"
+          />
+          <div className="absolute bottom-2 right-2 md:bottom-8 md:right-8 lg:bottom-8 lg:right-8 z-10">
+            <Button
+              size="icon"
+              variant="secondary"
+              className="h-6 w-6 rounded-full bg-gray-200 hover:bg-gray-300 active:bg-gray-400 transition-all duration-200"
+              onClick={() => removeColorPicker(index)}
+              aria-label="Remove color"
+            >
+              <Trash2 className="h-4 w-4 text-red-500" />
+            </Button>
+          </div>
+        </div>
+      ))}
+      {colors.length < 3 && (
+        <Button
+          size="icon"
+          variant="outline"
+          className="h-16 w-16 sm:h-20 sm:w-20 rounded-lg border-dashed"
+          onClick={addColorPicker}
+        >
+          <Plus className="h-4 w-4" />
+        </Button>
+      )}
+    </div>
           </div>
         </div>
 
