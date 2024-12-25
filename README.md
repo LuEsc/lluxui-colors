@@ -24,5 +24,8 @@ The project is deployed on **Vercel**, ensuring high performance and easy access
 - **Responsive Design**: Optimized for mobile, tablet, and desktop devices, ensuring accessibility and usability across different screen sizes.
 - **Easy Color Management**: Add and remove colors from the palette easily with intuitive UI elements.
 
-Developed by [LlumUI](https://medium.com/@llunaes).
+Developed by [LluxUI](https://medium.com/@llunaes).
+
+---
+
 Thank you for using **LluxUI Colors**!
